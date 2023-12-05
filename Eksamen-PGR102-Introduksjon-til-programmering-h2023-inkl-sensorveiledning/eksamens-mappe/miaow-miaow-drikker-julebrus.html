@@ -48,27 +48,28 @@
 
       const output = document.getElementById("output-div");
 
+      //Array of messages that will be displayed in the output-div.
       const messages = [
         "Kelneren helte Julebrus i glassene",
         "Kelneren forsøkte å helle Julebrus i et av glassene, men det var for fullt!",
         "Katten til venstre drakk Julebrus",
         "Katten til høyre drakk Julebrus",
-        "Ene katten forsøkte å drikke julebrus men glasset var tomt! Hvor er kelneren??"
-      ]
+        "Ene katten forsøkte å drikke julebrus men glasset var tomt! Hvor er kelneren??",
+      ];
 
       let glass1 = {
-        "id": document.getElementById("glass-1-content"),
-        "height": 0,
-        "maxHeight": 80,
-      }
+        id: document.getElementById("glass-1-content"),
+        height: 0,
+        maxHeight: 80,
+      };
 
       let glass2 = {
-        "id": document.getElementById("glass-2-content"),
-        "height": 0,
-        "maxHeight": 80,
-      }
+        id: document.getElementById("glass-2-content"),
+        height: 0,
+        maxHeight: 80,
+      };
 
-      const glasses = [glass1, glass2]
+      const glasses = [glass1, glass2];
 
       let waiterPours = 40;
       let catDrinks = 20;
@@ -76,14 +77,11 @@
 
       let amountLeft = waiterPours - catDrinks;
 
-      //   2 variable til, en if setning i pourGlass som sjekker hvor mye. Hvis mengden i if else er 80px må du stoppe den fra å helle opp i.
-
-      //Functions
+      //Make sure that the right amount of soda is poured into the glasses
       function pourGlass() {
-
-        for(let i = 0; i < 2; i++) {
-          if(glasses[i].height + waiterPours < amountOfSodaPossible + 1) {
-            output.innerHTML = messages[0];       
+        for (let i = 0; i < 2; i++) {
+          if (glasses[i].height + waiterPours < amountOfSodaPossible + 1) {
+            output.innerHTML = messages[0];
             glasses[i].height = glasses[i].height + waiterPours;
             glasses[i].id.style.height = `${glasses[i].height}px`;
           } else {
@@ -92,22 +90,7 @@
         }
       }
 
-
-      // function catClick() {
-      //   for (let i = 0; i < 2; i++) {
-      //     if (glasses[i].height === 0) {
-      //       output.innerHTML = messages[4];
-      //     } else {
-      //       glasses[i].height -= catDrinks;
-      //       glasses[i].id.style.height = `${glasses[i].height}px`;
-      //       if (i === 0) {
-      //         output.innerHTML = messages[2];
-      //       } else {
-      //         output.innerHTML = messages[3];
-      //       }
-      //     }
-      //   }
-      // }
+      //Make sure that the cat on the left drink the right amount of soda and gives out a message while doing it.
       function catLeftClicked() {
         for (let i = 0; i < 1; i++) {
           if (glass1.height === 0) {
@@ -118,8 +101,9 @@
             output.innerHTML = messages[2];
           }
         }
-    }
+      }
 
+      //Make sure that the cat on the right drink the right amount of soda and gives out a message while doing it.
       function catRightClicked() {
         for (let i = 0; i < 1; i++) {
           if (glass2.height === 0) {
@@ -132,7 +116,7 @@
         }
       }
 
-      //Onclicks
+      //Here are all the onclicks that we use.
       waiter.onclick = pourGlass;
       catLeft.onclick = catLeftClicked;
       catRight.onclick = catRightClicked;
