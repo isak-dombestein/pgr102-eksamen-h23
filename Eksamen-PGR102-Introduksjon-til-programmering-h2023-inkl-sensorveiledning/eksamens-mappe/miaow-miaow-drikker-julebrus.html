@@ -41,31 +41,39 @@
     <!-- DET ER IKKE LOV Å ENDRE PÅ NOE I HTML-KODEN! -->
 
     <script>
-        /* I denne script-tagen skal du kode JavaScript (ikke i ekstern fil) */
-
-
       //   constants
-        const glass1 = document.getElementById("glass-1-content");
-        const glass2 = document.getElementById("glass-2-content");
-        const waiter = document.getElementById("waiter");
-        const catLeft = document.getElementById("cat-left");
-        const catRight = document.getElementById("cat-right");
+      const glass1 = document.getElementById("glass-1-content");
+      const glass2 = document.getElementById("glass-2-content");
+      const waiter = document.getElementById("waiter");
+      const catLeft = document.getElementById("cat-left");
+      const catRight = document.getElementById("cat-right");
 
+      const output = document.getElementById("output-div");
 
+      let height = 0;
+      //   let maxheight = 80;
 
-      //   Functions
-      //   function pour() {
-      //     glass1.style.height = "100px";
-      //     glass2.style.height = "100px";
-      //     waiter.style.left = "50%";
-      //   }
+      function pourGlass() {
+        glass1.style.height = "40px";
+        glass2.style.height = "40px";
 
-      function
+        //Legge ved meldingen i en array og for-løkke.
+        output.innerHTML = "Kelner helte julebrus i begge glassene";
+      }
 
+      function catLeftCLicked() {
+        glass1.style.height -= "20px";
+        output.innerHTML = "Katten til venstre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
+      }
 
+      function catRightCLicked() {
+        glass2.style.height -= "20px";
+        output.innerHTML = "Katten til høyre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
+      }
 
-
-      //   OnClicks
+      //   catLeft.onclick = catLeftCLicked;
+      catRight.onclick = catRightCLicked;
+      waiter.onclick = pourGlass;
     </script>
   </body>
 </html>

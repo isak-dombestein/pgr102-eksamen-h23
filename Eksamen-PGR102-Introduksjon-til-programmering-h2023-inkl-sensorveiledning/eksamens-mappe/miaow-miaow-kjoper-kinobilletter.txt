@@ -7,3 +7,12 @@ if-else
 element.style
 array
 for(var i=0; i<x; i++){}
+
+
+
+
+
+function buyButton
+ // Denne funksjonen skal kjøpe billetter.
+// Den skal oppdatere antall billetter i oversikten.
+// Den skal også oppdatere totalprisen.

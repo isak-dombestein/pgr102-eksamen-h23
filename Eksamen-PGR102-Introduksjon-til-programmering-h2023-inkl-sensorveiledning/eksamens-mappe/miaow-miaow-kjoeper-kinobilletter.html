@@ -68,34 +68,53 @@
         childTicketPrice: 90,
       };
 
-      const adultCats = document.getElementById("adult-cats-div");
-      const adultPlusButton = document.getElementById(
-        "increase-adult-tickets-btn"
-      );
-      const adultMinusButton = document.getElementById(
-        "decrease-adult-tickets-btn"
-      );
+      const summary = document.getElementById("summary-div");
 
-      const childCats = document.getElementById("children-cats-div"); // Trenger ikke denne?
-      const plusButton = document.getElementById("increase-adult-tickets-btn");
-      const minusButton = document.getElementById("decrease-adult-tickets-btn");
+      const adultCats = {
+        increaseAdultTickets: document.getElementById(
+          "increase-adult-tickets-btn"
+        ),
+        decreaseAdultTickets: document.getElementById(
+          "decrease-adult-tickets-btn"
+        ),
+      };
 
-      const buyButton = document.getElementById("buy-btn");
+      const childCats = {
+        increaseChildTickets: document.getElementById(
+          "increase-adult-tickets-btn"
+        ),
+        decreaseChildTickets: document.getElementById(
+          "decrease-adult-tickets-btn"
+        ),
+      };
 
-      totalSum = 0;
+      const button = {
+        buyButton: document.getElementById("buy-btn"),
+      };
 
       function adultPlusButton() {
         // Denne funksjonen skal øke antall voksenbilletter med 1
         // og oppdatere antall voksenbilletter i oversikten.
         // Den skal også oppdatere totalprisen for voksenbilletter.
         // Den skal også oppdatere totalprisen.
+        if (increaseAdultTickets === 2 && increaseChildTickets === 3) {
+          summary.innerHTML = "Kjøp gjennomført! Kos deg på kino";
+        } else {
+          summary.innerHTML = "Feil";
+        }
       }
 
+      //Trenger ikke denne funksjonen?
       function adultMinusButton() {
         // Denne funksjonen skal redusere antall voksenbilletter med 1
         // og oppdatere antall voksenbilletter i oversikten.
         // Den skal også oppdatere totalprisen for voksenbilletter.
         // Den skal også oppdatere totalprisen.
+        if (decreaseAdultTickets === 0 && decreaseChildTickets === 0) {
+          summary.innerHTML = "Kjøp gjennomført! Kos deg på kino";
+        } else {
+          summary.innerHTML = "Feil";
+        }
       }
 
       function childPlusButton() {
@@ -112,26 +131,42 @@
         // Den skal også oppdatere totalprisen.
       }
 
-      function buyButton() {
-        // Denne funksjonen skal kjøpe billetter.
-        // Den skal oppdatere antall billetter i oversikten.
-        // Den skal også oppdatere totalprisen.
+      function button() {}
+
+      // Denne funksjonen skal regne ut totalprisen for voksenbilletter.
+      function adultTicketPrice() {}
+
+      // Denne funksjonen skal regne ut totalprisen for barnebilletter.
+      function childTicketPrice() {}
+
+      function buyButtonClicked() {
+        buttons[this.id].quantity + 1;
+
+        var product = products[this.id];
+
+        updateInterface();
       }
 
-      if (totalSum > 0) {
-        // Denne funksjonen skal gjøre at Miaow Miaow blir glad
-        // når hun har kjøpt billetter.
-      } else if (totalSum === 0) {
-        // Denne funksjonen skal gjøre at Miaow Miaow blir trist
-        // når hun ikke har kjøpt billetter.
+      function updateSum() {
+        let sum = 0;
+
+        for (let i = 0; i < products.length; i++) {
+          let product = products[i];
+
+          product.quantityElement.innerHTML = product.quantity;
+
+          sum += product.price * product.quantity;
+        }
+
+        totalSum.innerHTML = sum;
       }
 
-      adultPlusButton.onclicked = adultPlusButton;
-      adultMinusButton.onclicked = adultMinusButton;
-      childPlusButton.onclicked = childPlusButton;
-      childMinusButton.onclicked = childMinusButton;
+      increaseAdultTickets.onclicked = adultPlusButton;
+      decreaseAdultTickets.onclicked = adultMinusButton;
+      increaseChildTickets.onclicked = childPlusButton;
+      decreaseChildTickets.onclicked = childMinusButton;
 
-      buyButton.onclicked = buyButton;
+      buyButton.onclicked = button;
     </script>
   </body>
 </html>
