@@ -60,37 +60,68 @@
     <!-- DET ER IKKE LOV Å ENDRE PÅ NOE I HTML-KODEN! -->
 
     <script>
-      /* I denne script-tagen skal du kode JavaScript (ikke i ekstern fil) */
-
+      //constants
       const ticketPrices = {
         // Dette objektet må brukes for å få tak i billettprisene.
         adultTicketPrice: 150,
         childTicketPrice: 90,
       };
 
-      let increaseAdultTickets = document.getElementById("increase-adult-tickets-btn");
-      let decreaseAdultTickets = document.getElementById("decrease-adult-tickets-btn");
-      let increaseChildTickets = document.getElementById("increase-adult-tickets-btn");
-      let decreaseChildTickets = document.getElementById("decrease-adult-tickets-btn");
+      //Variabler
+      let increaseAdultTickets = document.getElementById(
+        "increase-adult-tickets-btn"
+      );
+      let decreaseAdultTickets = document.getElementById(
+        "decrease-adult-tickets-btn"
+      );
+      let increaseChildTickets = document.getElementById(
+        "increase-adult-tickets-btn"
+      );
+      let decreaseChildTickets = document.getElementById(
+        "decrease-adult-tickets-btn"
+      );
 
-      let numberOfAdultTickets = document.getElementById("number-of-adult-tickets-p");
-      let numberOfCHildrenTickets = document.getElementById("number-of-children-tickets-p");
+      let numberOfAdultTickets = document.getElementById(
+        "number-of-adult-tickets-p"
+      );
+      let numberOfCHildrenTickets = document.getElementById(
+        "number-of-children-tickets-p"
+      );
 
-      const buyButton = document.getElementById("buy-btn");
-      const summary = document.getElementById("summary-div");
+      let buyButton = document.getElementById("buy-btn");
+      let summary = document.getElementById("summary-div");
 
-      const buttons = [
+      let buttons = [
         increaseAdultTickets,
         decreaseAdultTickets,
         increaseChildTickets,
         decreaseChildTickets,
       ];
 
+      let sum = 0;
+      let adultTickets = 0;
+
+      //Functions
       function adultCat() {
-        let adultTickets = 0;
         adultTickets++;
         output.innerHTML = `Antall voksenbilletter: ${adultTickets}`;
       }
+
+      function updatePurchaseOverview() {
+        if (numberOfAdultTickets > 0 || numberOfChildTickets > 0);
+        sum += numberOfAdultTickets * adultTicketPrice;
+        sum += numberOfChildTickets * childTicketPrice;
+
+        summary.innerHTML = `Totalpris voksenbilletter: ${adultTicketPrice} * ${numberOfAdultTickets}`;
+      }
+
+        function buyButtonClicked() {
+            if (numberOfAdultTickets === 2 || numberOfChildTickets === 3 ) {
+            summary.innerHTML = `Du har kjøpt billetter for` ${sum}`kr`;);
+            } else {
+            alert("Du har ikke kjøpt noen billetter");
+            }
+        }
 
       increaseAdultTickets.onclicked = adultCat;
       //   buyButton.onclicked = buyButtonClicked;
