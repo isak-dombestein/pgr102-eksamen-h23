@@ -52,19 +52,27 @@
 
       let waiterPours = "40";
       let catDrinks = "20";
+      let amountOfSodaPossible = "80";
 
       let amountLeft = waiterPours - catDrinks;
 
-      //   let height = 0;
-
-      //   let catRemovesFromGlass = 20;
-      //   let afterWaiterPours = 40;
+      //   2 variable til, en if setning i pourGlass som sjekker hvor mye. Hvis mengden i if else er 80px må du stoppe den fra å helle opp i.
 
       //Functions
       function pourGlass() {
         glass1.style.height = "40px";
         glass2.style.height = "40px";
         output.innerHTML = "Kelner helte julebrus i begge glassene"; //Huske å sette den inn i en array og for-løkke.
+
+        if (`${waiterPours}px` >= `${amountOfSodaPossible}px`) {
+          output.innerHTML = "Kelneren helte for mye julebrus, det rant over";
+        } else if (`${waiterPours}px` <= `${amountOfSodaPossible}px`) {
+          output.innerHTML =
+            "Kelneren helte for lite julebrus, det ble ikke nok til begge kattene";
+        } else {
+          output.innerHTML =
+            "Kelneren helte akkurat nok julebrus til begge kattene";
+        }
       }
 
       function catLeftClicked() {
