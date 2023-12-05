@@ -54,21 +54,19 @@
         "id": document.getElementById("glass-1-content"),
         "height": 0,
         "maxHeight": 80,
-        "currentLevel": 0,
       }
 
       let glass2 = {
         "id": document.getElementById("glass-2-content"),
         "height": 0,
         "maxHeight": 80,
-        "currentLevel": 0,
       }
 
       const glasses = [glass1, glass2]
 
-      let waiterPours = "40";
-      let catDrinks = "20";
-      let amountOfSodaPossible = "80";
+      let waiterPours = 40;
+      let catDrinks = 20;
+      let amountOfSodaPossible = 80;
 
       let amountLeft = waiterPours - catDrinks;
 
@@ -77,11 +75,11 @@
       //Functions
       function pourGlass() {
 
-        for(let g = 0; g < 2; g++) {
-          if(glasses[g].currentLevel + waiterPours < glasses[g].maxHeight + 1) {
-            console.log('pouring glasses')
-            glasses[g].height += glasses[g].height + waiterPours;
-            glasses[g].id.style.height += `${glasses[g].height}px`;
+        for(let i = 0; i < 2; i++) {
+          if(glasses[i].height + waiterPours < amountOfSodaPossible + 1) {
+            console.log('pouring glasses');            
+            glasses[i].height = glasses[i].height + waiterPours;
+            glasses[i].id.style.height = `${glasses[i].height}px`;
           } else {
             console.log('will overflow!')
           }
@@ -107,13 +105,23 @@
         // }
       }
       function catLeftClicked() {
-        glass1.style.height = `${amountLeft}px`;
+        if (glass1.height === 0) {
+          console.log('glass1 is empty!');
+        } else {
+          glass1.height -= amountLeft;
+        glass1.id.style.height = `${glass1.height}px`;
         output.innerHTML = "Katten til venstre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
       }
+    }
 
       function catRightClicked() {
-        glass2.style.height = `${amountLeft}px`;
-        output.innerHTML = "Katten til høyre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
+        if (glass2.height === 0) {
+          console.log('glass2 is empty!');
+        } else {
+          glass2.height -= amountLeft;
+          glass2.id.style.height = `${glass2.height}px`;
+          output.innerHTML = "Katten til høyre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
+        }
       }
 
       //Onclicks
