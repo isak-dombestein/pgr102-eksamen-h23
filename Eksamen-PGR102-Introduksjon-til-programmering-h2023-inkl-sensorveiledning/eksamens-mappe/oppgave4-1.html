@@ -91,7 +91,13 @@
       let buyButton = document.getElementById("buy-btn");
       let summary = document.getElementById("summary-div");
 
-      let ticketInHand = document.getElementsByTagName("article");
+      // let ticketInHand = document.getElementsByTagName("article");
+
+        let ticket1 = document.getElementById("billett-1");
+        let ticket2 = document.getElementById("billett-2");
+        let ticket3 = document.getElementById("billett-3");
+        let ticket4 = document.getElementById("billett-4");
+        let ticket5 = document.getElementById("billett-5");
 
       let buttons = [
         increaseAdultTickets,
@@ -148,9 +154,16 @@
 
       function buyButtonClicked() {
         if (adultTickets === 2 && childTickets === 3) {
+
+          ticket1.innerHTML = `<img src="images/billett.png">`;
+          ticket2.innerHTML = `<img src="images/billett.png">`;
+          ticket3.innerHTML = `<img src="images/billett.png">`;
+          ticket4.innerHTML = `<img src="images/billett.png">`;
+          ticket5.innerHTML = `<img src="images/billett.png">`;
+
           summary.innerHTML =
             "Du har kjøpt billetter for deg og dine. Kos deg på kino!";
-          ticketInHand.innerHTML = `<img src="images/billett.png">`;
+          // ticketInHand.innerHTML = `<img src="images/billett.png">`;
         } else {
           summary.innerHTML =
             "Du har dessverre ikke kjøpt riktig antall billetter til deg og dine :(";
