@@ -1,0 +1,9 @@
+variabler
+getElementById
+onclick
+function functionName(){}
+innerHTML
+if-else
+element.style
+array
+for(var i=0; i<x; i++){}
