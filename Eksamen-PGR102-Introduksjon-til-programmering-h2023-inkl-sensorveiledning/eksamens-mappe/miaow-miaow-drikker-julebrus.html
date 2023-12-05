@@ -62,15 +62,13 @@
         "maxHeight": 80,
       }
 
-      const glasses = [glass1, glass2]
+      const glasses = [glass1, glass2];
 
       let waiterPours = 40;
       let catDrinks = 20;
       let amountOfSodaPossible = 80;
 
       let amountLeft = waiterPours - catDrinks;
-
-      //   2 variable til, en if setning i pourGlass som sjekker hvor mye. Hvis mengden i if else er 80px må du stoppe den fra å helle opp i.
 
       //Functions
       function pourGlass() {
@@ -81,9 +79,8 @@
             glasses[i].height = glasses[i].height + waiterPours;
             glasses[i].id.style.height = `${glasses[i].height}px`;
           } else {
-            console.log('will overflow!')
+            console.log("will overflow!");
           }
-          
         }
 
         // glass1.style.height = `${waiterPours + }px`;
