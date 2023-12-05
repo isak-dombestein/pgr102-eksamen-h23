@@ -32,6 +32,122 @@
 
     <script>/* I denne script-tagen skal du kode JavaScript (ikke i ekstern fil) */
 
+    // moveDistance = distance in px
+    // moveRate = time in ms
+
+    const eskild = {
+        "name": "Eskildpadde",
+        "id": document.getElementById('eskilpadde'),
+        "moveDistance": 3,
+        "moveRate": 1000,
+        "position": 0,
+    }
+
+    const geir = {
+        "name": "Geir-Geit",
+        "id": document.getElementById('geir-geit'),
+        "moveDistance": 12,
+        "moveRate": 500,
+        "position": 0,
+    }
+
+    const miaow = {
+        "name": "Miaow-Miaow",
+        "id": document.getElementById('miaow-miaow'),
+        "moveLeftFoot": document.getElementById('move-miaows-left-leg-btn'),
+        "moveRightFoot": document.getElementById('move-miaows-right-leg-btn'),
+        "position": 0,
+    }
+
+    const status = document.getElementById('winner-status');
+
+    const lastClicked = {
+        "left": false,
+        "right": false,
+    }
+    
+    let char = [eskild, geir, miaow]; 
+
+    miaow.moveLeftFoot.onclick = moveMiaowLeft;
+    miaow.moveRightFoot.onclick = moveMiaowRight;
+
+    setInterval(function() {
+        // Move Eskild
+        eskild.position += eskild.moveDistance
+        eskild.id.style.left = eskild.position + 'px';
+        checkPositions(eskild);
+    }, eskild.moveRate);
+    
+    setInterval(function() {
+        // Move Geir
+
+        // Random number for Geir to retreat
+        let goBack = Math.floor(Math.random() * 100);
+
+        if (geir.position > 128 && goBack <= 25) {
+            geir.position -= 10;
+            geir.id.style.left = geir.position + 'px;'
+        } else {
+            // console.log(goBack);
+            geir.position += geir.moveDistance
+            geir.id.style.left = geir.position + 'px';
+        } checkPositions(geir);
+    }, geir.moveRate);
+
+    function moveMiaowLeft() {
+        // Move miaow left foot
+        if (lastClicked.left === false) {
+            let moveDistance = Math.floor(Math.random() * (10 - 5) + 5);
+            console.log('moving left foot');
+            lastClicked.left = true;
+            lastClicked.right = false;
+            miaow.position += moveDistance;
+            miaow.id.style.left = miaow.position + 'px';
+            console.log(moveDistance);
+            checkPositions(miaow);
+        } else {
+            console.log('left foot has already been moved, Move right foot first.');
+        }
+    }
+
+    function moveMiaowRight() {
+        // Move miaow right foot
+        if (lastClicked.right === false) {
+            let moveDistance = Math.floor(Math.random() * (10 - 5) + 5);
+            console.log('moving right foot');
+            lastClicked.right = true;
+            lastClicked.left = false;
+            miaow.position += moveDistance;
+            miaow.id.style.left = miaow.position + 'px';
+            console.log(moveDistance);
+            checkPositions(miaow);
+        } else {
+            console.log('right foot has already been moved. Move left foot first.');
+        }
+    }
+
+    function checkPositions() {
+        let finishPos = 790;
+
+        // if (name.position >= finishPos) {
+        //     status.innerHTML = char.name + ' vant løpet!';
+        //     console.log(char.name + ' vant løpet!');
+        // }
+
+        for (let i = 0; i < 2; i++) {
+            console.log('Checking positions');
+            if (char[i].position >= finishPos) {
+                status.innerHTML = char[i].name + ' vant løpet!';
+                console.log(char[i].name + ' vant løpet!');
+                geir.moveDistance = 0;
+                geir.moveRate = 0;
+                eskild.moveDistance = 0;
+                eskild.moveRate = 0;
+            }
+        }
+    }
+
+
         /*
             Beskrivelse av setInterval-funksjonen.
             ---

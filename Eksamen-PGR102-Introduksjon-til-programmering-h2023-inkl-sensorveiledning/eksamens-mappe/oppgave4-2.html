@@ -1,1 +1,168 @@
-Hvis du velger utvidelsesoppgave kopier all koden fra originalen hit slik at du beholder både original og utvidet kode.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kappløpet</title>
+    <!-- CSS skal ikke røres -->
+    <link rel="stylesheet" href="css-skal-ikke-roeres/kapploepet.css">
+</head>
+<body>
+
+    <div id="container"><!-- DET ER IKKE LOV Å ENDRE PÅ NOE I HTML-KODEN! -->
+
+        <h1 id="main-heading">Kappløpet</h1>
+        <h2 id="winner-status">Løpet er i gang</h2>
+
+        <input id="move-miaows-left-leg-btn" type="button" value="Beveg Miaows venstre ben">
+        <input id="move-miaows-right-leg-btn" type="button" value="Beveg Miaows høyre ben">
+
+        <div id="pond"></div>
+        <div id="finish-line"></div>
+        <img id="building" src="images/building-2.png">
+
+        <img id="eskilpadde" src="images/eskilpadde.png">
+
+        <img id="miaow-miaow" src="images/miaow-miaow-runner.png">
+        
+        <img id="geir-geit" src="images/geirgeit.png">          
+
+    </div><!-- DET ER IKKE LOV Å ENDRE PÅ NOE I HTML-KODEN! -->
+    
+
+    <script>/* I denne script-tagen skal du kode JavaScript (ikke i ekstern fil) */
+
+    // moveDistance = distance in px
+    // moveRate = time in ms
+
+    const eskild = {
+        "name": "Eskildpadde",
+        "id": document.getElementById('eskilpadde'),
+        "moveDistance": 3,
+        "moveRate": 1000,
+        "position": 0,
+    }
+
+    const geir = {
+        "name": "Geir-Geit",
+        "id": document.getElementById('geir-geit'),
+        "moveDistance": 12,
+        "moveRate": 500,
+        "position": 0,
+    }
+
+    const miaow = {
+        "name": "Miaow-Miaow",
+        "id": document.getElementById('miaow-miaow'),
+        "moveLeftFoot": document.getElementById('move-miaows-left-leg-btn'),
+        "moveRightFoot": document.getElementById('move-miaows-right-leg-btn'),
+        "position": 0,
+    }
+
+    const status = document.getElementById('winner-status');
+
+    const lastClicked = {
+        "left": false,
+        "right": false,
+    }
+    
+    let char = [eskild, geir, miaow]; 
+
+    miaow.moveLeftFoot.onclick = moveMiaowLeft;
+    miaow.moveRightFoot.onclick = moveMiaowRight;
+
+    setInterval(function() {
+        // Move Eskild
+        eskild.position += eskild.moveDistance
+        eskild.id.style.left = eskild.position + 'px';
+        checkPositions();
+
+    }, eskild.moveRate);
+    
+    setInterval(function() {
+        // Move Geir
+
+        // Random number for Geir to retreat
+        let goBack = Math.floor(Math.random() * 100);
+
+        if (geir.position > 128 && goBack <= 25) {
+            geir.position -= 10;
+            geir.id.style.left = geir.position + 'px;'
+        } else {
+            // console.log(goBack);
+            geir.position += geir.moveDistance
+            geir.id.style.left = geir.position + 'px';
+        } checkPositions();
+    }, geir.moveRate);
+
+    function moveMiaowLeft() {
+        // Move miaow left foot
+        if (lastClicked.left === false) {
+            let moveDistance = Math.floor(Math.random() * (10 - 5) + 5);
+            console.log('moving left foot');
+            lastClicked.left = true;
+            lastClicked.right = false;
+            miaow.position += moveDistance;
+            miaow.id.style.left = miaow.position + 'px';
+            console.log(moveDistance);
+            checkPositions();
+        } else {
+            console.log('left foot has already been moved, Move right foot first.');
+        }
+    }
+
+    function moveMiaowRight() {
+        // Move miaow right foot
+        if (lastClicked.right === false) {
+            let moveDistance = Math.floor(Math.random() * (10 - 5) + 5);
+            console.log('moving right foot');
+            lastClicked.right = true;
+            lastClicked.left = false;
+            miaow.position += moveDistance;
+            miaow.id.style.left = miaow.position + 'px';
+            console.log(moveDistance);
+            checkPositions();
+        } else {
+            console.log('right foot has already been moved. Move left foot first.');
+        }
+    }
+
+    function checkPositions() {
+        let finishPos = 790;
+
+        // if (name.position >= finishPos) {
+        //     status.innerHTML = char.name + ' vant løpet!';
+        //     console.log(char.name + ' vant løpet!');
+        // }
+
+        if (geir.position >= 400 || miaow.position >= 400) {
+            eskild.id.style.top = '550px'
+            eskild.moveDistance = 60;
+        }
+
+        for (let i = 0; i < 2; i++) {
+            console.log('Checking positions');
+            if (char[i].position >= finishPos) {
+                status.innerHTML = char[i].name + ' won the race!';
+                console.log(char[i].name + ' won the race!');
+                geir.moveDistance = 0;
+                geir.moveRate = 0;
+                eskild.moveDistance = 0;
+                eskild.moveRate = 0;
+            }
+        }
+    }
+
+
+        /*
+            Beskrivelse av setInterval-funksjonen.
+            ---
+            setInterval(function(){
+                // Kode som skal skje for hver x millisekunder plasseres her
+            }, 1000); // 1000 betyr 1000 millisekunder som betyr 1 sekund. 
+        */
+
+    </script>
+    
+</body>
+</html>
