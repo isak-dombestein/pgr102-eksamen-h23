@@ -120,11 +120,12 @@
           <p>Totalpris: 0,-</p>
       }
 
-      function buyButtonClicked() {
-        if (numberOfAdultTickets === 2 || numberOfChildTickets === 3) {
-          summary.innerHTML = `Du har kjøpt billetter for ${sum}kr`;
-        } else {
-          alert("Du har ikke kjøpt noen billetter");
+        function buyButtonClicked() {
+            if (numberOfAdultTickets === 2 || numberOfChildTickets === 3 ) {
+            summary.innerHTML = `Du har kjøpt billetter fori ${sum}kr`;
+            } else {
+            alert("Du har ikke kjøpt noen billetter");
+            }
         }
       }
 
