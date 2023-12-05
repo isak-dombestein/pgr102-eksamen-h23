@@ -41,7 +41,7 @@
     <!-- DET ER IKKE LOV Å ENDRE PÅ NOE I HTML-KODEN! -->
 
     <script>
-      //   constants
+      //constants
       const glass1 = document.getElementById("glass-1-content");
       const glass2 = document.getElementById("glass-2-content");
       const waiter = document.getElementById("waiter");
@@ -50,30 +50,37 @@
 
       const output = document.getElementById("output-div");
 
-      let height = 0;
-      //   let maxheight = 80;
+      let waiterPours = "40";
+      let catDrinks = "20";
 
+      let amountLeft = waiterPours - catDrinks;
+
+      //   let height = 0;
+
+      //   let catRemovesFromGlass = 20;
+      //   let afterWaiterPours = 40;
+
+      //Functions
       function pourGlass() {
         glass1.style.height = "40px";
         glass2.style.height = "40px";
-
-        //Legge ved meldingen i en array og for-løkke.
-        output.innerHTML = "Kelner helte julebrus i begge glassene";
+        output.innerHTML = "Kelner helte julebrus i begge glassene"; //Huske å sette den inn i en array og for-løkke.
       }
 
-      function catLeftCLicked() {
-        glass1.style.height -= "20px";
+      function catLeftClicked() {
+        glass1.style.height = `${amountLeft}px`;
         output.innerHTML = "Katten til venstre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
       }
 
-      function catRightCLicked() {
-        glass2.style.height -= "20px";
+      function catRightClicked() {
+        glass2.style.height = `${amountLeft}px`;
         output.innerHTML = "Katten til høyre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
       }
 
-      //   catLeft.onclick = catLeftCLicked;
-      catRight.onclick = catRightCLicked;
+      //Onclicks
       waiter.onclick = pourGlass;
+      catLeft.onclick = catLeftClicked;
+      catRight.onclick = catRightClicked;
     </script>
   </body>
 </html>
