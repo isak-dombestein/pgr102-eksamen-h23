@@ -75,16 +75,16 @@
         "decrease-adult-tickets-btn"
       );
       let increaseChildTickets = document.getElementById(
-        "increase-adult-tickets-btn"
+        "increase-children-tickets-btn"
       );
       let decreaseChildTickets = document.getElementById(
-        "decrease-adult-tickets-btn"
+        "decrease-children-tickets-btn"
       );
 
       let numberOfAdultTickets = document.getElementById(
         "number-of-adult-tickets-p"
       );
-      let numberOfCHildrenTickets = document.getElementById(
+      let numberOfChildTickets = document.getElementById(
         "number-of-children-tickets-p"
       );
 
@@ -98,39 +98,67 @@
         decreaseChildTickets,
       ];
 
-      let sum = 0;
       let adultTickets = 0;
+      let childTickets = 0;
       let totalSumAdult = adultTickets * ticketPrices.adultTicketPrice;
       let totalSumChild = childTickets * ticketPrices.childTicketPrice;
+      let totalSum = totalSumAdult + totalSumChild;
 
       //Functions
-      function adultCat() {
+      function adultIncrease() {
         adultTickets++;
-        summary.innerHTML = `Antall voksenbilletter: ${adultTickets}`;
+        updatePurchaseOverview();
+
+        numberOfAdultTickets.innerHTML = `Antall voksenbilletter: ${adultTickets}`;
+      }
+
+      function adultDecrease() {
+        adultTickets--;
+        updatePurchaseOverview();
+
+        numberOfAdultTickets.innerHTML = `Antall voksenbilletter: ${adultTickets}`;
+      }
+
+      function childIncrease() {
+        childTickets++;
+        updatePurchaseOverview();
+
+        numberOfChildTickets.innerHTML = `Antall barnebilletter: ${childTickets}`;
+      }
+
+      function childDecrease() {
+        childTickets--;
+        updatePurchaseOverview();
+
+        numberOfChildTickets.innerHTML = `Antall barnebilletter: ${childTickets}`;
       }
 
       function updatePurchaseOverview() {
-        if (numberOfAdultTickets > 0 || numberOfChildTickets > 0);
-        sum += numberOfAdultTickets * adultTicketPrice;
-        sum += numberOfChildTickets * childTicketPrice;
+        totalSumAdult = adultTickets * ticketPrices.adultTicketPrice;
+        totalSumChild = childTickets * ticketPrices.childTicketPrice;
+        totalSum = totalSumAdult + totalSumChild;
 
-        summary.innerHTML = <h3>Kjøpsoversikt</h3>
-          <p>Totalpris voksenbilletter: 0,-</p>
-          <p>Totalpris barnebilletter: 0,-</p>
-          <p>Totalpris: 0,-</p>
+        summary.innerHTML = `<h3>Kjøpsoversikt</h3>
+          <p>Totalpris voksenbilletter: ${totalSumAdult},-</p>
+          <p>Totalpris barnebilletter: ${totalSumChild},-</p>
+          <p>Totalpris: ${totalSum},-</p>`;
       }
 
-        function buyButtonClicked() {
-            if (numberOfAdultTickets === 2 || numberOfChildTickets === 3 ) {
-            summary.innerHTML = `Du har kjøpt billetter fori ${sum}kr`;
-            } else {
-            alert("Du har ikke kjøpt noen billetter");
-            }
+      function buyButtonClicked() {
+        if (adultTickets === 2 && childTickets === 3) {
+          summary.innerHTML =
+            "Du har kjøpt billetter for deg og dine. Kos deg på kino!";
+        } else {
+          summary.innerHTML =
+            "Du har dessverre ikke kjøpt riktig antall billetter til deg og dine :(";
         }
       }
 
-      increaseAdultTickets.onclick = adultCat;
-      //   buyButton.onclicked = buyButtonClicked;
+      increaseAdultTickets.onclick = adultIncrease;
+      decreaseAdultTickets.onclick = adultDecrease;
+      increaseChildTickets.onclick = childIncrease;
+      decreaseChildTickets.onclick = childDecrease;
+      buyButton.onclick = buyButtonClicked;
     </script>
   </body>
 </html>
