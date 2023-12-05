@@ -42,13 +42,19 @@
 
     <script>
       //constants
-      // const glass1 = document.getElementById("glass-1-content");
-      // const glass2 = document.getElementById("glass-2-content");
       const waiter = document.getElementById("waiter");
       const catLeft = document.getElementById("cat-left");
       const catRight = document.getElementById("cat-right");
 
       const output = document.getElementById("output-div");
+
+      const messages = [
+        "Kelneren helte Julebrus i glassene",
+        "Kelneren forsøkte å helle Julebrus i et av glassene, men det var for fullt!",
+        "Katten til venstre drakk Julebrus",
+        "Katten til høyre drakk Julebrus",
+        "Ene katten forsøkte å drikke julebrus men glasset var tomt! Hvor er kelneren??"
+      ]
 
       let glass1 = {
         "id": document.getElementById("glass-1-content"),
@@ -62,7 +68,7 @@
         "maxHeight": 80,
       }
 
-      const glasses = [glass1, glass2];
+      const glasses = [glass1, glass2]
 
       let waiterPours = 40;
       let catDrinks = 20;
@@ -70,54 +76,59 @@
 
       let amountLeft = waiterPours - catDrinks;
 
+      //   2 variable til, en if setning i pourGlass som sjekker hvor mye. Hvis mengden i if else er 80px må du stoppe den fra å helle opp i.
+
       //Functions
       function pourGlass() {
 
         for(let i = 0; i < 2; i++) {
           if(glasses[i].height + waiterPours < amountOfSodaPossible + 1) {
-            console.log('pouring glasses');            
+            output.innerHTML = messages[0];       
             glasses[i].height = glasses[i].height + waiterPours;
             glasses[i].id.style.height = `${glasses[i].height}px`;
           } else {
-            console.log("will overflow!");
+            output.innerHTML = messages[1];
           }
         }
-
-        // glass1.style.height = `${waiterPours + }px`;
-        // glass2.style.height = `${waiterPours + }px`;
-
-        // height1 = amountLeft + waiterPours;
-        // height2 = glass2.style.height;
-
-        // output.innerHTML = "Kelner helte julebrus i begge glassene"; //Huske å sette den inn i en array og for-løkke.
-
-        // if (`${glass1.style.height}px` > `${amountOfSodaPossible}px`) {
-        //   output.innerHTML = "Kelneren helte for mye julebrus, det rant over";
-        // } else if (`${glass2.style.height}px` <= `${amountOfSodaPossible}px`) {
-        //   output.innerHTML =
-        //     "Kelneren helte for lite julebrus, det ble ikke nok til begge kattene";
-        // } else {
-        //   output.innerHTML =
-        //     "Kelneren helte akkurat nok julebrus til begge kattene";
-        // }
       }
+
+
+      // function catClick() {
+      //   for (let i = 0; i < 2; i++) {
+      //     if (glasses[i].height === 0) {
+      //       output.innerHTML = messages[4];
+      //     } else {
+      //       glasses[i].height -= catDrinks;
+      //       glasses[i].id.style.height = `${glasses[i].height}px`;
+      //       if (i === 0) {
+      //         output.innerHTML = messages[2];
+      //       } else {
+      //         output.innerHTML = messages[3];
+      //       }
+      //     }
+      //   }
+      // }
       function catLeftClicked() {
-        if (glass1.height === 0) {
-          console.log('glass1 is empty!');
-        } else {
-          glass1.height -= amountLeft;
-        glass1.id.style.height = `${glass1.height}px`;
-        output.innerHTML = "Katten til venstre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
-      }
+        for (let i = 0; i < 1; i++) {
+          if (glass1.height === 0) {
+            output.innerHTML = messages[4];
+          } else {
+            glass1.height -= amountLeft;
+            glass1.id.style.height = `${glass1.height}px`;
+            output.innerHTML = messages[2];
+          }
+        }
     }
 
       function catRightClicked() {
-        if (glass2.height === 0) {
-          console.log('glass2 is empty!');
-        } else {
-          glass2.height -= amountLeft;
-          glass2.id.style.height = `${glass2.height}px`;
-          output.innerHTML = "Katten til høyre drakk julebrus"; //Huske å sette den inn i en array og for-løkke.
+        for (let i = 0; i < 1; i++) {
+          if (glass2.height === 0) {
+            output.innerHTML = messages[4];
+          } else {
+            glass2.height -= amountLeft;
+            glass2.id.style.height = `${glass2.height}px`;
+            output.innerHTML = messages[3];
+          }
         }
       }
 
